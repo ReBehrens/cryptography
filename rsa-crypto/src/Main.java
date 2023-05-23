@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class Main {
+
     static int bitLength = 1024;
     static SecureRandom random = new SecureRandom();
 

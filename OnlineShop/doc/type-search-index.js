@@ -1,0 +1,1 @@
+typeSearchIndex = [{"l":"All Classes and Interfaces","u":"allclasses-index.html"},{"p":"waren","l":"Artikel"},{"p":"waren","l":"Buch"},{"p":"waren","l":"Film"},{"p":"nutzer","l":"Kunde"},{"p":"waren","l":"Lager"},{"p":"onlineshop","l":"Main"},{"p":"waren","l":"Musikartikel"},{"p":"waren","l":"Spiele"},{"p":"abwicklung","l":"Warenkorb"}];updateSearchResults();
