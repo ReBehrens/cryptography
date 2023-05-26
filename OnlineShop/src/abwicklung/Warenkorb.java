@@ -106,6 +106,8 @@ public class Warenkorb {
 	 * Ausgabe der Ware im Warenkorp.
 	 * eine erweiterte <code> for </code>-Schleife wird benutzt um alle Artikel im Array
 	 * des Warenkorps auszugeben.
+	 * 
+	 * @return alle Artikel im Warenkorp
 	 */
 	public String ausgabeWarenkorpInhalt() {
 		String result = "";

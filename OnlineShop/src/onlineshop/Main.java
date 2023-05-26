@@ -15,7 +15,7 @@ package onlineshop;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 
-import abwicklung.Bestellung;
+import abwicklung.*;
 import nutzer.*;
 import waren.*;
 
@@ -29,7 +29,6 @@ public class Main {
 	 * @Param logger Log4j 2 Logger.
 	 * 
 	 */
-	
 	private static Logger logger = LogManager.getRootLogger();
 	
 	/**
@@ -155,6 +154,17 @@ public class Main {
 		
 		System.out.println("");
 		Bestellung.getBestellListe();
+		
+		
+		
+		System.out.println(Bestellung.getNextBestellung().getBestellnummer());
+		System.out.println(Bestellung.bestellungErledigt("Bestellung2"));
+
+		System.out.println(Bestellung.getNextBestellung().getBestellnummer());
+		System.out.println(Bestellung.bestellungErledigt("Bestellung1"));
+		System.out.println(Bestellung.getNextBestellung().getBestellnummer() + " "
+						   + Bestellung.getNextBestellung().getBestellDatum());
+		System.out.println(id1.getVorname() + " " + id1.getName() + " " + id1.getDatumErstellung());
 		
 		
 	}

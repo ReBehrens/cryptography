@@ -5,6 +5,7 @@ import java.util.Map;
 import java.util.Stack;
 
 import abwicklung.*;
+import interfaces.DateFormat;
 import waren.*;
 
 
@@ -28,8 +29,10 @@ public class Kunde {
 	  * @param vipKunde dient der abfrage dieser Kunde Sonderkonditionen erhält oder nicht.
 	  * @param warenkorb RefLink zur eigenen Warenkorb-instanz für die einzelnen Kunden-Instanz.
 	  * @param logger Log4j 2 Logger.
+	  * @param datumErstellung Zeigt das Datum und Uhrzeit von der Regestrierung des kunden.
 	  */
 	private static HashMap<String, Kunde> kundenverwaltung = new HashMap<String, Kunde>();
+	
 	
 	private String name;
 	private String vorname;
@@ -39,6 +42,7 @@ public class Kunde {
 	private Boolean vipKunde = false;
 	private Warenkorb warenkorb;
 	private Stack<Bestellung> bestellhistorie;
+	private String datumErstellung;
 	
 	
 	//----
@@ -51,6 +55,7 @@ public class Kunde {
 	  * @param vorname Vorname des Kunden.
 	  * @param geschlecht für Statistischen zwecke und der Ansprache.
 	  * @param geburtsdatum Geburtsdatum des Kunden.
+	  * @param kundennummer übergabe der kundennummer des Kunden.
 	  * @param vip dient der abfrage dieser Kunde Sonderkonditionen erhält oder nicht.
 	  */
 	public Kunde (String name, String vorname, String geschlecht, String geburtsdatum, String kundennummer, Boolean vip) {
@@ -62,6 +67,7 @@ public class Kunde {
 		this.vipKunde = vip;
 		this.warenkorb = new Warenkorb();
 		this.bestellhistorie = new Stack<>();
+		this.datumErstellung = DateFormat.newDate();
 	}
 	
 	
@@ -136,18 +142,10 @@ public class Kunde {
 	//---
 	/**
 	 * Ausgabe der Kundennummer des Kundens
-	 * @return
+	 * @return ausgabe der kundennummer
 	 */
 	public String getKundennummer() {
 		return kundennummer;
-	}
-	
-	/**
-	 * Ändern der Kundennummer eines Kundens
-	 * @param kundennummer
-	 */
-	public void setKundennummer(String kundennummer) {
-		this.kundennummer = kundennummer;
 	}
 	
 	//---
@@ -183,11 +181,13 @@ public class Kunde {
 	/**
 	 * Ausgabe aller Artikel im Warenkorb.
 	 * 
+	 * @return ausgabe der anzahl im Warenkorb befindlichen Artikel
 	 */
 	public String getWarenkorbInhalt() {
 		String result = "Kunde: " + this.getVorname() + " " + this.getName() + "\n";
 		return result = result + this.warenkorb.ausgabeWarenkorpInhalt();
 	}
+	
 	/**
 	 * Lerren des Warenkorbs
 	 */
@@ -219,6 +219,13 @@ public class Kunde {
 		}
 	}
 	
+	
+	/**
+	 * Kauf Abschließen
+	 * Auslösen der bestellung / Kauf der im Warenkorp befindlichen Artikel.
+	 * der kauf wandert in die Queue inkl. datum und Uhrzeit.
+	 * zusätzlich wird der Warenkorp resetet
+	 */
 	public void kaufen() {
 		Bestellung bestellung = new Bestellung(warenkorb, (getVorname() + getName()));
 		Bestellung.setBestellListe(bestellung);
@@ -227,6 +234,12 @@ public class Kunde {
 		
 	}
 	
-	
+	/**
+	 * ausgabe Erstellungsdatum
+	 * @return Datum der erstanmeldung
+	 */
+	public String getDatumErstellung() {
+		return datumErstellung;
+	}
 	
 }

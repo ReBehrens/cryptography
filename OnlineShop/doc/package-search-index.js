@@ -1,1 +1,1 @@
-packageSearchIndex = [{"l":"abwicklung"},{"l":"All Packages","u":"allpackages-index.html"},{"l":"nutzer"},{"l":"onlineshop"},{"l":"waren"}];updateSearchResults();
+packageSearchIndex = [{"l":"abwicklung"},{"l":"All Packages","u":"allpackages-index.html"},{"l":"interfaces"},{"l":"nutzer"},{"l":"onlineshop"},{"l":"waren"}];updateSearchResults();
