@@ -51,7 +51,8 @@ public class Main {
 		
 		//------- Logistig --------
 		System.out.println(Lager.getAnzLager());
-		Lager lg1 = new Lager();
+		Lager lg1 = new Lager("Lager1");
+		Lager.addLager(lg1);
 		System.out.println(Lager.getAnzLager());
 		System.out.println("");
 		
@@ -166,6 +167,8 @@ public class Main {
 						   + Bestellung.getNextBestellung().getBestellDatum());
 		System.out.println(id1.getVorname() + " " + id1.getName() + " " + id1.getDatumErstellung());
 		
+		
+		Lager.exportDatenbank();
 		
 	}
 

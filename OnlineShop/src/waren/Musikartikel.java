@@ -42,6 +42,19 @@ public class Musikartikel extends Artikel {
 	
 	//-----
 	
+	@Override
+	public String getStringDB() {
+		return this.TYP + "\",\""
+			 + getHersteller() + "\",\""
+			 + getTitel() + ","
+			 + getArtikelnummer() + "\",\""
+			 + getArtikelMenge() + "\",\""
+			 + getArtikelPreis() + "\",\""
+			 + this.interpret + "\","
+			 + "\n";		 
+	}
+	
+	
 	/**
 	 * Gib den Namen des Interprets des Musikartikels aus
 	 * @return interpret Interpretennamen

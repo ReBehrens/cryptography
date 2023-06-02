@@ -63,9 +63,15 @@ public abstract class Artikel {
 		this.artikelMenge = menge;
 		this.artikelPreis = preis;
 		
+		
 	}
-	
-	
+	/**
+	 * Abstrakte meth. für Export.
+	 * Erzeugt einen String mit allen informationen für den Export in CSV datein
+	 * die Methode muss in den unterklassen definiert werden.
+	 * @return Export-fähiger String
+	 */
+	public abstract String getStringDB();
 	//-----
 	/**
 	 * Gibt den Hersteller des Artikels aus.

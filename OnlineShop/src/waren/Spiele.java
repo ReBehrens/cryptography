@@ -42,6 +42,19 @@ public class Spiele extends Artikel {
 	
 	//-----
 	
+	@Override
+	public String getStringDB() {
+		return this.TYP + "\",\""
+			 + getHersteller() + "\",\""
+			 + getTitel() + ","
+			 + getArtikelnummer() + "\",\""
+			 + getArtikelMenge() + "\",\""
+			 + getArtikelPreis() + "\",\""
+			 + this.autor + "\","
+			 + "\n";		 
+	}
+	
+	
 	/**
 	 * Gib den Namen des Autors eines Buches aus
 	 * @return autor Autornamen

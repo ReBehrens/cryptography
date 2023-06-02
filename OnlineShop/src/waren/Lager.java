@@ -1,7 +1,15 @@
 package waren;
 
+
+import java.io.File;
+import java.io.FileNotFoundException;
+
+import java.io.FileWriter;
+import java.io.IOException;
+import java.util.ArrayList;
 import java.util.HashSet;
 import java.util.Iterator;
+
 
 
 /**
@@ -13,9 +21,19 @@ import java.util.Iterator;
  */
 public class Lager {
 	
-	 /**
+	/**
 	  * Attribute der Lagerklasse.
 	  * diese Attribute dienen der übersicht uber die Lager-instanz.
+	  * 
+	  * @param anzLager static int enthält die Anzahl an existierenden Lager.
+	  * @param lagerOrte static ArrayList Speichert alle Lager objekte.
+	  * @param sep static File trennzeichen
+	  * @param homePfad static String sucht den HomePfad des Benutzers.
+	  * @param dateiName static enthält den Dateiname der Datenbank für die Lagerhäuser inkl. Ware 
+	  * @param dateiPfad static enthält den Versteichnispfad inkl Dateiname.
+	  * 
+	  * @param verzeichnisPfad static File-objekt das für die Navigation zum speicherverzeichnis führt.
+	  * @param datei static File-objekt das für die Navigation zu datei führt.
 	  * 
 	  * @param bestandBuch Beinhaltet die Gesamtmenge aller Bücher in diesem Lager.
 	  * @param bestandFilm Beinhaltet die Gesamtmenge aller Filme in diesem Lager.
@@ -25,31 +43,113 @@ public class Lager {
 	  * @param bestandArt Beinhaltet die Gesamtmenge aller Artikel in diesem Lager.
 	  * @param anzLager enthält die Anzahl an existierenden Lager.
 	  */
+	private static int anzLager = 0;
+	private static ArrayList<Lager> lagerOrte = new ArrayList<>();
+	
+	private static String sep = File.separator;
+	private static String homePfad = System.getProperty("user.home");
+	private static String dateiName = "artikelDB.CSV";
+	private static String dateiPfad = homePfad + sep + "onlineshop" + sep;
+	
+	private static File verzeichnisPfad = new File(dateiPfad);
+	private static File datei = new File(dateiPfad + sep + dateiName);
+	
+	private String lagername;
 	private int bestandBuch = 0;
 	private int bestandFilm = 0;
 	private int bestandMusikArt = 0;
 	private int bestandSpiele = 0;
 	
 	private int bestandArt = 0;
-	private static int anzLager = 0;
 	
 	private HashSet<Artikel> sortiment;
+
 	
-	//------
+	//---------------------------------------
+	
+	/**
+	 * Hinzufügern des Lagerorts in die liste
+	 * Fügt das Lager in eine ArrayList hinzu.
+	 * @param name Name des zu speichernden Lagers
+	 */
+	public static void addLager(Lager name) {
+		lagerOrte.add(name);
+	}
+	
+	/**
+	 * Prüfen ob das Speicher Verzeichnis Existiert
+	 * @return Gibt ein <code> true </code> aus wenn das Verz. existier und schreibbar ist.
+	 */
+	public static Boolean CheckVerzeichnis() {
+		if(datei.exists() && datei.canWrite()) {
+			return true;
+		}
+		return false;
+		
+	}
+	
+	/**
+	 * erstellen eines Verz. und eine DB datei
+	 * anschließend wird über die <code> CheckVerzeichnis() </code> erneut überprüft,
+	 * ob nun alles vorhanden ist.
+	 * @return gibt ein <code> true </code> zurück wenn die erstellung erfolgreich war.
+	 */
+	public static Boolean createVerzeichnis() {
+		try {
+			if(verzeichnisPfad.mkdirs() == true && datei.createNewFile() == true) {
+				if(CheckVerzeichnis() == true) return true;
+			}
+		} catch (IOException ex) {
+			ex.printStackTrace();
+		}
+		return false;
+	}
 
 	/**
-	 * erstellt eine Lager-instandz.
-	 * zusätzlich wird <code> anzLager++ </code> ausgeführt um die Anzahl der existierenden Lager zu erweitern.
+	 * exportieren der DB (Lager und Waren)
 	 */
-	public Lager() {
-		anzLager++;
-		sortiment = new HashSet<>();
+	public static void exportDatenbank() {
+		Boolean check = false;
+		try {
+			if(CheckVerzeichnis() == false) {
+				if(createVerzeichnis() == true) {
+					if (CheckVerzeichnis() == true) {
+					}
+				}
+			} else if(CheckVerzeichnis() == true) check = true;
 			
+			if(check == true) {
+				FileWriter writer = new FileWriter(datei);
+				for(Lager l : lagerOrte) {
+					String s = "\"" + l.getLagername();
+					for(Artikel lagerWare : l.sortiment) {
+						writer.write(s + "\",\"" + lagerWare.getStringDB());
+					}
+				}
+				writer.close();
+				System.out.println("Datei Erstellt");
+			} else {
+				System.out.println("DB Speicher Fehler");
+			}
+		} catch (FileNotFoundException ex) {
+			ex.printStackTrace();
+		} catch (IOException ex) {
+			ex.printStackTrace();
 		}
-	
-	
-	//-----
+	}
 
+	
+	//-----------------
+	
+	/**
+	 * Gibt den Namen des Lagers aus
+	 * @return String Lagername
+	 */
+	public String getLagername() {
+		return lagername;
+	}
+	
+	
 	/**
 	 * Gibt den Bestand aller Bücher im Lager aus.
 	 * @return bestandBuch Bestand aller Bücher
@@ -68,7 +168,7 @@ public class Lager {
 		setLagerBestand();
 	}
 	
-	//-----
+	
 	/**
 	 * Gibt den Bestand aller Filme im Lager aus.
 	 * @return bestandFilm
@@ -87,7 +187,7 @@ public class Lager {
 		setLagerBestand();
 	}
 
-	//-----
+	
 	/**
 	 * Gibt den Bestand aller Musikartikel im Lager aus.
 	 * @return bestandBuch
@@ -106,7 +206,7 @@ public class Lager {
 		setLagerBestand();
 	}
 
-	//-----
+	
 	/**
 	 * Gibt den Bestand aller Spiele im Lager aus.
 	 * @return bestandBuch
@@ -125,7 +225,7 @@ public class Lager {
 		setLagerBestand();
 	}
 
-	//-----
+	
 	/**
 	 * Gibt den Bestand aller Artikel im Lager aus.
 	 * @return bestandBuch Bestand aller Artikel
@@ -142,7 +242,7 @@ public class Lager {
 		bestandArt = bestandBuch + bestandFilm + bestandMusikArt + bestandSpiele;
 	}
 
-	//-----
+	
 	/**
 	 * Gibt die Anzahl der existierenden Lager aus.
 	 * @return anzLager Anzahl Lager
@@ -177,7 +277,7 @@ public class Lager {
 		return true;
 	}
 	
-	//---
+	
 	/**
 	 * Artikel dem Lager Array hinzufügen.
 	 * nach überprüfung ob es den Artikel bereits gibt, wird dieser dem Arrays hinzugefügt.
@@ -192,7 +292,6 @@ public class Lager {
 		}
 	}
 	
-	//---
 	
 	/**
 	 * Nicht mehr vorhandene Artikel aus Sortment löschen.
@@ -211,6 +310,8 @@ public class Lager {
 		}
 		
 	}
+	
+	
 	/**
 	 * Ausgabe des aktuellen Sortiments
 	 */
@@ -223,6 +324,16 @@ public class Lager {
 	}
 	
 	
-	
-	
+	/**
+	 * erstellt eine Lager-instandz.
+	 * zusätzlich wird <code> anzLager++ </code> ausgeführt um die Anzahl der existierenden Lager zu erweitern.
+	 * 
+	 * @param name Lager name
+	 */
+	public Lager(String name) {
+		this.lagername = name;
+		anzLager++;
+		sortiment = new HashSet<>();
+			
+		}
 }

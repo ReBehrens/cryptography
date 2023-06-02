@@ -38,7 +38,19 @@ public class Buch extends Artikel {
 		this.autor = autor;
 		lagerInventur();
 		}
-
+	
+	@Override
+	public String getStringDB() {
+		return this.TYP + "\",\""
+			 + getHersteller() + "\",\""
+			 + getTitel() + ","
+			 + getArtikelnummer() + "\",\""
+			 + getArtikelMenge() + "\",\""
+			 + getArtikelPreis() + "\",\""
+			 + this.autor + "\","
+			 + "\n";		 
+	}
+	
 	
 	//-----
 	/**

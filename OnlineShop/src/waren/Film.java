@@ -38,6 +38,19 @@ public class Film extends Artikel {
 		this.regisseur = regisseur;
 		lagerInventur();
 		}
+	
+	@Override
+	public String getStringDB() {
+		return this.TYP + "\",\""
+			 + getHersteller() + "\",\""
+			 + getTitel() + ","
+			 + getArtikelnummer() + "\",\""
+			 + getArtikelMenge() + "\",\""
+			 + getArtikelPreis() + "\",\""
+			 + this.regisseur + "\","
+			 + "\n";		 
+	}
+	
 
 	
 	//-------------
