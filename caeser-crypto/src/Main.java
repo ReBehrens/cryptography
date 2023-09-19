@@ -154,6 +154,7 @@ public class Main {
         return key;
 
     }
+  
     public static HashMap setAlphabet() {
         HashMap<Integer, Character> map = new HashMap<>();
         map.put(0, 'A');

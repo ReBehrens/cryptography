@@ -5,6 +5,7 @@
  */
 package waren;
 
+import java.util.Objects;
 
 /**
  * Vorlage für die einzelnen Artikelklassen.
@@ -64,7 +65,41 @@ public abstract class Artikel {
 		this.artikelPreis = preis;
 		
 		
+	/**
+	 * Überschreibung der <code>hashCode()</code> Methode
+	 * 
+	 * zur besseren überprüfung für das Sortiment HashSet wurde diese Methode
+	 * überschrieben
+	 * 
+	 * @return neuer Hashwert der Objekte
+	 */
 	}
+	@Override
+	public int hashCode() {
+		return Objects.hash(artikelnummer, hersteller, titel);
+	}
+
+	
+	/**
+	 * Überschreibung der <code> equals()</code> Methode
+	 * zur besseren überprüfung der Objekte wurde die <code> equals()</code> Überschrieben
+	 * 
+	 * @param vergleicht mit dem angegebenen Objekt auf gleichheit.
+	 * @return <code>true</code> oder <code>false</code> jenachdem ob das Objekt gleich oder ungleich ist
+	 */
+	@Override
+	public boolean equals(Object obj) {
+		if (this == obj)
+			return true;
+		if (obj == null)
+			return false;
+		if (getClass() != obj.getClass())
+			return false;
+		Artikel other = (Artikel) obj;
+		return Objects.equals(artikelnummer, other.artikelnummer) && Objects.equals(hersteller, other.hersteller)
+				&& Objects.equals(titel, other.titel);
+	}
+
 	/**
 	 * Abstrakte meth. für Export.
 	 * Erzeugt einen String mit allen informationen für den Export in CSV datein
