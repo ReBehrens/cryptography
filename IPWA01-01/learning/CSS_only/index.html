@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Onlineshop with CSS only</title>
+    <link rel="stylesheet" href="/learning/CSS_only/index.css" />
+  </head>
+
+  <body>
+    <header>
+      <a href="#" class="navbar-brand">Headphones Shop</a>
+      <nav>
+        <div>
+          <a class="navbar-active" href="#">Home</a>
+          <a href="#">Profile</a>
+          <a href="#">Messages</a>
+          <a class="navbar-disable" href="#">Reports</a>
+        </div>
+
+        <a href="#">Login</a>
+      </nav>
+    </header>
+
+    <main>
+      <section class="carousel-container">
+        <div class="carousel">
+          <img
+            class="mySlides"
+            alt="First slide"
+            src="/learning/img/headphones/cover0.jpg"
+          />
+
+          <img
+            class="mySlides"
+            alt="Second slide"
+            src="/learning/img/headphones/cover1.jpg"
+          />
+
+          <img
+            class="mySlides"
+            alt="Third slide"
+            src="/learning/img/headphones/cover2.jpg"
+          />
+        </div>
+        <div class="carousel-buttons">
+          <button onclick="plusDivs(-1)">&#10094;</button>
+          <button onclick="plusDivs(+1)">&#10095;</button>
+        </div>
+      </section>
+      <section repeat="9">
+        <img src="/learning/img/headphones/headphone{index}.jpg" alt="..." />
+        <h2>Headphone {index}</h2>
+        <p>Product Name</p>
+        <p>€ 399,-</p>
+        <p>429,-</p>
+      </section>
+      <script src="/learning/CSS_only/app.js"></script>
+      <script src="/learning/repat.js"></script>
+    </main>
+
+    <footer></footer>
+  </body>
+  <script src="/learning/CSS_only/app.js"></script>
+  <script src="/learning/repat.js"></script>
+</html>
