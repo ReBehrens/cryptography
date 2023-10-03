@@ -48,12 +48,19 @@
           <button onclick="plusDivs(+1)">&#10095;</button>
         </div>
       </section>
-      <section repeat="9">
-        <img src="/learning/img/headphones/headphone{index}.jpg" alt="..." />
-        <h2>Headphone {index}</h2>
-        <p>Product Name</p>
-        <p>€ 399,-</p>
-        <p>429,-</p>
+
+      <section class="product-section">
+        <section class="product-card" repeat="9">
+          <img src="/learning/img/headphones/headphone{index}.jpg" alt="..." />
+          <article class="product-card-text">
+            <h2>Headphone {index}</h2>
+            <p>Product Name</p>
+            <span>
+              <p>€ 399,-</p>
+              <p>429,-</p>
+            </span>
+          </article>
+        </section>
       </section>
     </main>
 
